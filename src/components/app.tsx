@@ -1,10 +1,11 @@
 import { FunctionalComponent, h } from "preact";
 import { Route, Router, RouterOnChangeArgs } from "preact-router";
 
-import Home from "../routes/home";
-import Profile from "../routes/profile";
+import EmbedIndex from "../routes/embedIndex";
+import EmbedPlayer from "../routes/embedPlayer";
+import Login from "../routes/login";
+import LoginCallback from "../routes/loginCallback";
 import NotFoundPage from "../routes/notfound";
-import Header from "./header";
 
 const App: FunctionalComponent = () => {
     let currentUrl: string;
@@ -14,11 +15,11 @@ const App: FunctionalComponent = () => {
 
     return (
         <div id="app">
-            <Header />
             <Router onChange={handleRoute}>
-                <Route path="/" component={Home} />
-                <Route path="/profile/" component={Profile} user="me" />
-                <Route path="/profile/:user" component={Profile} />
+                <Route path="/embed/:embedId" component={EmbedIndex} />
+                <Route path="/login/:embedId/" component={Login}/>
+                <Route path="/login/:embedId/callback" component={LoginCallback} />
+                <Route path="/embed/:embedId/player" component={EmbedPlayer} />
                 <NotFoundPage default />
             </Router>
         </div>
